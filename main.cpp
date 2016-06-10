@@ -3,9 +3,6 @@
 
 using namespace std;
 
-void Encrypt(string text);
-void Decrypt(string text);
-
 string input;
 char cypher[6][5] =
 {
@@ -14,7 +11,7 @@ char cypher[6][5] =
     {'l','m','n','o','p'},
     {'q','r','s','t','u'},
     {'v','w','x','y','z'},
-    {'k','j','j','j','j'}
+    {'k','@','!','%','-'}
 };
 
 void Encrypt(string text)
@@ -48,5 +45,6 @@ int main()
 {
     cin >> input;
     Decrypt(input);
+
 }
 
