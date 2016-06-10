@@ -1,18 +1,11 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
 string input;
-char cypher[6][5] =
-{
-    {'a','b','c','d','e'},
-    {'f','g','h','i','j'},
-    {'l','m','n','o','p'},
-    {'q','r','s','t','u'},
-    {'v','w','x','y','z'},
-    {'k','@','!','%','-'}
-};
+char cypher[6][5];
 
 void Encrypt(string text)
 {
@@ -41,10 +34,30 @@ void Decrypt(string text)
   }
 };
 
+void loadCypher()
+{
+    string fileText;
+    ifstream file_("cypher.txt");
+    if (file_.is_open())
+    {
+        while(getline(file_,fileText));
+        int j = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            for (int y = 0; y < 5; y++)
+            {
+                cypher[i][y] = fileText[j];
+                j+=1;
+            }
+        }
+        file_.close();
+    } else {    cout << "File is not open"; }
+}
+
+
 int main()
 {
+    loadCypher();
     cin >> input;
-    Decrypt(input);
-
 }
 
