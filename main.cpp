@@ -3,10 +3,10 @@
 
 using namespace std;
 
-int CharToInt(char letter);
 void Encrypt(string text);
 void Decrypt(string text);
 
+string input;
 char cypher[6][5] =
 {
     {'a','b','c','d','e'},
@@ -16,8 +16,6 @@ char cypher[6][5] =
     {'v','w','x','y','z'},
     {'k','j','j','j','j'}
 };
-
-string input;
 
 void Encrypt(string text)
 {
@@ -35,28 +33,12 @@ void Encrypt(string text)
     }
 };
 
-int CharToInt(char letter)
-{
-    int x;
-    if (letter == '1')
-        x = 1;
-    if (letter == '2')
-        x = 2;
-    if (letter == '3')
-        x = 3;
-    if (letter == '4')
-        x = 4;
-    if (letter == '5')
-        x = 5;
-    return x;
-}
-
 void Decrypt(string text)
 {
   for (int i = 0; i < text.length(); i+=2)
   {
-        int x = CharToInt(text[x]);
-        int y = CharToInt(text[x+1]);
+        int x = text[i] - '0';
+        int y = text[i+1] - '0';
 
         cout << cypher[x][y];
   }
