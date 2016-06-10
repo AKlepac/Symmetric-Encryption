@@ -51,7 +51,7 @@ void loadCypher()
             }
         }
         file_.close();
-    } else {    cout << "File is not open"; }
+    } else {    cout << "Cypher File is not open"; }
 }
 
 
