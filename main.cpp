@@ -7,6 +7,7 @@ using namespace std;
 string Encrypt(string text);
 string Decrypt(string text);
 void loadCypher();
+bool FileExists(const char *filename);
 
 const unsigned CypherWidth = 6;
 const unsigned CypherHeight = 5;
@@ -56,23 +57,45 @@ string Decrypt(string text)
 void loadCypher()
 {
     string fileText;
-    ifstream file_("cypher.txt");
-    if (file_.is_open())
-    {
-		//You set j to 0, then add one to j every time, why just not use a for loop? - Kieren
 
-        while(getline(file_,fileText));						
-        int j = 0;
-        for (int i = 0; i < 6; i++)
-        {
-            for (int y = 0; y < 5; y++)
-            {
-                cypher[i][y] = fileText[j];
-                j+=1;
-            }
-        }
-        file_.close();
-    } else {    cout << "Cypher File is not open"; }
+	bool CypherFileExists = FileExists("cypher.txt");
+
+	if (!CypherFileExists)
+	{
+		cout << "Cypher File is not able to be opened\n\n";
+
+		ofstream File("cypher.txt");								//Create new file
+
+		File << "abcdefghijklmnopqrstuvwxyz$!%-" << std::endl;		//Output test cypher
+		File.close();
+
+		cout << "New Cypher file created\n\n";
+	}
+
+	ifstream File("cypher.txt");									//Create a new stream to now input from the file
+
+	//If it extisted all along, or we just created it, we are now going to read from it
+	while (getline(File, fileText))
+	{
+		int j = 0;
+		for (int i = 0; i < 6; i++)
+		{
+			for (int y = 0; y < 5; y++)
+			{
+				cypher[i][y] = fileText[j];
+				j += 1;
+			}
+		}
+		File.close();
+	}
+
+}
+
+/*Thanks stack overflow*/
+bool FileExists(const char *filename)
+{
+	ifstream ifile(filename);
+	return ifile.good();
 }
 
 
