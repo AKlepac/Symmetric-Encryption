@@ -8,20 +8,23 @@ string Encrypt(string text);
 string Decrypt(string text);
 void loadCypher();
 
+const unsigned CypherWidth = 6;
+const unsigned CypherHeight = 5;
+
 string input;
-char cypher[6][5];
+char cypher[CypherWidth][CypherHeight];
 
 string Encrypt(string text)
 {
 	std::string Encrypted;
 
-    for (int x = 0; x <= text.length(); x++)
+    for (int iLetter = 0; iLetter <= text.length(); iLetter++)
     {
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < CypherWidth; i++)
         {
-            for (int y = 0; y < 5; y++)
+            for (int y = 0; y < CypherHeight; y++)
             {
-                if (text[x] == cypher[i][y] || text[x] == cypher[i][y] - 32)	//32 is the offset to make uppcase equal to lowercase
+                if (text[iLetter] == cypher[i][y] || text[iLetter] == cypher[i][y] - 32)	//32 is the offset to make uppcase equal to lowercase
 				{
 					Encrypted.append(std::to_string(i));
 					Encrypted.append(std::to_string(y));
@@ -56,7 +59,9 @@ void loadCypher()
     ifstream file_("cypher.txt");
     if (file_.is_open())
     {
-        while(getline(file_,fileText));
+		//You set j to 0, then add one to j every time, why just not use a for loop? - Kieren
+
+        while(getline(file_,fileText));						
         int j = 0;
         for (int i = 0; i < 6; i++)
         {
