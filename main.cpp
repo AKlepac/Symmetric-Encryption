@@ -21,7 +21,7 @@ string Encrypt(string text)
         {
             for (int y = 0; y < 5; y++)
             {
-                if (text[x] == cypher[i][y])
+                if (text[x] == cypher[i][y] || text[x] == cypher[i][y] - 32)	//32 is the offset to make uppcase equal to lowercase
 				{
 					Encrypted.append(std::to_string(i));
 					Encrypted.append(std::to_string(y));
